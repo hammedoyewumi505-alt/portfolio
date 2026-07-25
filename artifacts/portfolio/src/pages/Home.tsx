@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, Variants, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { SiFiverr, SiUpwork, SiTiktok, SiFacebook } from 'react-icons/si';
 import { FiArrowRight, FiArrowUpRight, FiChevronLeft, FiChevronRight, FiDownload, FiX, FiMenu } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa6';
@@ -293,78 +293,261 @@ function TickerSection() {
 }
 
 /* ─── PROJECTS ─── */
-function ProjectsSection() {
-  const projects = [
-    {
-      title: 'Revesto Realtor',
-      desc: 'Commercial real estate website for booking property tours and contacting agents.',
-      tags: ['Real Estate', 'Web Design', 'Responsive'],
-      image: project1,
+const projectData = [
+  {
+    number: '01',
+    title: 'Revesto Realtor',
+    desc: 'Commercial real estate website for booking property tours and contacting agents.',
+    tags: ['Real Estate', 'Web Design', 'Responsive'],
+    image: project1,
+    accent: '#ff3278',
+  },
+  {
+    number: '02',
+    title: 'GEDA',
+    desc: "Eswatini's Discovery Platform, a web app built using no-code tools.",
+    tags: ['No-Code', 'Web App', 'Discovery Platform'],
+    image: project2,
+    accent: '#a855f7',
+  },
+  {
+    number: '03',
+    title: 'WordPilot AI',
+    desc: 'An AI-powered blog writing tool built with a modern web builder.',
+    tags: ['AI', 'SaaS', 'Blog Tool'],
+    image: project3,
+    accent: '#0ea5e9',
+  },
+];
+
+function TiltCard({ proj, index }: { proj: typeof projectData[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 });
+  const glowX = useTransform(x, [-0.5, 0.5], ['0%', '100%']);
+  const glowY = useTransform(y, [-0.5, 0.5], ['0%', '100%']);
+
+  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const handleLeave = () => { x.set(0); y.set(0); };
+
+  const isEven = index % 2 === 0;
+  const entranceVariant: Variants = {
+    hidden: { opacity: 0, x: isEven ? -80 : 80, y: 40 },
+    visible: {
+      opacity: 1, x: 0, y: 0,
+      transition: { duration: 1, ease: [0.22, 1, 0.36, 1], delay: index * 0.15 },
     },
-    {
-      title: 'GEDA',
-      desc: "Eswatini's Discovery Platform, a web app built using no-code tools.",
-      tags: ['No-Code', 'Web App', 'Discovery Platform'],
-      image: project2,
-    },
-    {
-      title: 'WordPilot AI',
-      desc: 'An AI-powered blog writing tool built with a modern web builder.',
-      tags: ['AI', 'SaaS', 'Blog Tool'],
-      image: project3,
-    },
-  ];
+  };
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto relative z-10 bg-background">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-80px' }}
+      variants={entranceVariant}
+      style={{ perspective: 1200 }}
+      className="w-full"
+    >
       <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-        variants={fadeUp}
+        ref={ref}
+        onMouseMove={handleMouse}
+        onMouseLeave={handleLeave}
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        className="relative rounded-3xl overflow-hidden cursor-pointer group"
       >
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold mb-10 md:mb-16 text-center">
-          Featured Projects
-        </h2>
-      </motion.div>
+        {/* Gradient border */}
+        <div
+          className="absolute inset-0 rounded-3xl p-[1px] z-10 pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, ${proj.accent}60, transparent 50%, ${proj.accent}30)`,
+          }}
+        />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-        {projects.map((proj, i) => (
-          <motion.div
-            key={i}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeUp}
-            className={`group flex flex-col bg-card border border-card-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(255,50,120,0.15)] ${
-              i === 2 ? 'md:col-span-2 md:flex-row' : ''
-            }`}
+        {/* Moving cursor glow */}
+        <motion.div
+          className="absolute w-64 h-64 rounded-full pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-[60px]"
+          style={{
+            background: `radial-gradient(circle, ${proj.accent}50 0%, transparent 70%)`,
+            left: glowX,
+            top: glowY,
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+
+        {/* Background project number */}
+        <div
+          className="absolute inset-0 flex items-center justify-end pr-6 select-none pointer-events-none z-0 overflow-hidden"
+          style={{ transform: 'translateZ(-20px)' }}
+        >
+          <span
+            className="font-display font-bold leading-none opacity-[0.04] group-hover:opacity-[0.07] transition-opacity duration-500"
+            style={{ fontSize: 'clamp(120px, 20vw, 240px)', color: proj.accent }}
           >
-            <div className={`overflow-hidden bg-[#1a1a1a] ${i === 2 ? 'md:w-1/2' : 'w-full'}`}>
-              <img
-                src={proj.image}
-                alt={proj.title}
-                className="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-            </div>
-            <div className={`p-5 sm:p-8 flex flex-col justify-center ${i === 2 ? 'md:w-1/2' : ''}`}>
-              <div className="flex flex-wrap gap-2 mb-4">
+            {proj.number}
+          </span>
+        </div>
+
+        {/* Card body */}
+        <div className="relative z-20 bg-[#0c0c0c] rounded-3xl overflow-hidden">
+          {/* Image */}
+          <div className="overflow-hidden relative">
+            <motion.img
+              src={proj.image}
+              alt={proj.title}
+              className="w-full h-auto block"
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            />
+            {/* Image overlay shimmer */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background: `linear-gradient(135deg, ${proj.accent}15 0%, transparent 60%)`,
+              }}
+            />
+          </div>
+
+          {/* Info bar */}
+          <div className="p-6 md:p-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="flex flex-wrap gap-2 mb-3">
                 {proj.tags.map((tag) => (
-                  <span key={tag} className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
+                  <span
+                    key={tag}
+                    className="text-xs font-medium px-3 py-1 rounded-full border"
+                    style={{
+                      color: proj.accent,
+                      borderColor: `${proj.accent}40`,
+                      background: `${proj.accent}10`,
+                    }}
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="text-xl md:text-2xl font-display font-bold mb-2 md:mb-3">{proj.title}</h3>
-              <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8 line-clamp-3 leading-relaxed">{proj.desc}</p>
-              <div className="mt-auto">
-                <button className="flex items-center gap-2 border border-primary text-primary px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-colors">
-                  View Project <FiArrowUpRight />
-                </button>
-              </div>
+              <h3 className="font-display font-bold text-xl md:text-2xl text-white">{proj.title}</h3>
+              <p className="text-muted-foreground text-sm mt-1 max-w-xs leading-relaxed">{proj.desc}</p>
             </div>
-          </motion.div>
-        ))}
+
+            {/* Arrow button */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
+              style={{ background: `${proj.accent}20`, border: `1px solid ${proj.accent}40`, color: proj.accent }}
+            >
+              <FiArrowUpRight size={18} />
+            </motion.button>
+          </div>
+
+          {/* Bottom accent line */}
+          <div
+            className="h-[2px] w-0 group-hover:w-full transition-all duration-700 ease-out"
+            style={{ background: `linear-gradient(to right, ${proj.accent}, transparent)` }}
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function ProjectsSection() {
+  return (
+    <section id="projects" className="relative z-10 bg-background overflow-hidden py-16 md:py-28">
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[160px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative">
+        {/* Header */}
+        <div className="mb-14 md:mb-20">
+          <motion.p
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-primary text-xs font-medium tracking-[0.3em] uppercase mb-4"
+          >
+            — Selected Work
+          </motion.p>
+
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="overflow-hidden">
+              <motion.h2
+                initial={{ y: '100%' }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="font-display font-bold text-4xl sm:text-5xl md:text-7xl tracking-tight leading-none"
+              >
+                Featured
+              </motion.h2>
+            </div>
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="font-mono text-xs text-muted-foreground hidden sm:block mb-2"
+            >
+              {String(projectData.length).padStart(2, '0')} Projects
+            </motion.span>
+          </div>
+
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ y: '100%' }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              className="font-display font-bold text-4xl sm:text-5xl md:text-7xl tracking-tight leading-none text-outline"
+            >
+              Projects
+            </motion.h2>
+          </div>
+        </div>
+
+        {/* Project grid — 2 col top, 1 full-width bottom */}
+        <div className="flex flex-col gap-6 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+            {projectData.slice(0, 2).map((proj, i) => (
+              <TiltCard key={proj.number} proj={proj} index={i} />
+            ))}
+          </div>
+          <TiltCard proj={projectData[2]} index={2} />
+        </div>
+
+        {/* View all CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex justify-center mt-14 md:mt-20"
+        >
+          <a
+            href="#"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-8 py-4 font-medium text-sm border border-white/10 bg-white/5 backdrop-blur-sm hover:border-primary/50 transition-colors duration-300"
+          >
+            <span className="relative z-10">View All Projects</span>
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="relative z-10"
+            >
+              <FiArrowUpRight />
+            </motion.span>
+            <div className="absolute inset-0 bg-primary/10 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
