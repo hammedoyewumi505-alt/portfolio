@@ -18,6 +18,7 @@ export default function Home() {
       <HeroSection />
       <TickerSection />
       <ProjectsSection />
+      <ServicesSection />
       <TestimonialsSection />
       <AboutSection />
       <Footer />
@@ -348,6 +349,118 @@ function ProjectsSection() {
             </div>
           </motion.div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+/* ─── SERVICES ─── */
+const services = [
+  {
+    number: '01',
+    title: 'Web Design',
+    desc: 'Stunning, conversion-focused designs crafted in Figma — pixel-perfect layouts that reflect your brand and engage your audience.',
+    tags: ['Figma', 'UI/UX', 'Branding', 'Prototyping'],
+  },
+  {
+    number: '02',
+    title: 'Web Development',
+    desc: 'Scalable, performant web applications built with modern stacks — React, Node.js, TypeScript, and more, delivered on time.',
+    tags: ['React', 'Node.js', 'TypeScript', 'MongoDB'],
+  },
+  {
+    number: '03',
+    title: 'Landing Page',
+    desc: 'High-converting landing pages engineered to turn visitors into leads — fast, SEO-optimised, and A/B test ready.',
+    tags: ['Conversion', 'SEO', 'Responsive', 'Analytics'],
+  },
+  {
+    number: '04',
+    title: 'Mobile App',
+    desc: 'Cross-platform mobile experiences built with React Native and Expo — smooth, native-feeling apps for iOS and Android.',
+    tags: ['React Native', 'Expo', 'iOS', 'Android'],
+  },
+];
+
+const dropIn: Variants = {
+  hidden: { opacity: 0, y: -70, scaleY: 0.85 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scaleY: 1,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+function ServicesSection() {
+  return (
+    <section id="services" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto relative z-10 bg-background">
+      {/* Header */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={fadeUp}
+        className="mb-12 md:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+      >
+        <div>
+          <p className="text-primary text-xs font-medium tracking-widest uppercase mb-3">— My Services</p>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold leading-tight">
+            How I Help<br className="hidden sm:block" /> You Grow
+          </h2>
+        </div>
+        <p className="text-muted-foreground text-sm md:text-base max-w-xs leading-relaxed">
+          Everything you need to establish a powerful digital presence — under one roof.
+        </p>
+      </motion.div>
+
+      {/* Service rows */}
+      <div className="flex flex-col origin-top">
+        {services.map((svc, i) => (
+          <motion.div
+            key={svc.number}
+            custom={i}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={dropIn}
+            className="group border-t border-white/10 py-7 md:py-10 flex flex-col md:flex-row md:items-center gap-4 md:gap-0 hover:border-primary/40 transition-colors duration-300 cursor-default"
+          >
+            {/* Number */}
+            <span className="text-xs font-mono text-muted-foreground/50 md:w-16 shrink-0">{svc.number}</span>
+
+            {/* Title */}
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight md:flex-1 group-hover:text-primary transition-colors duration-300">
+              {svc.title}
+            </h3>
+
+            {/* Right col: desc + tags */}
+            <div className="md:w-[340px] lg:w-[400px] shrink-0 flex flex-col gap-3">
+              <p className="text-muted-foreground text-sm leading-relaxed">{svc.desc}</p>
+              <div className="flex flex-wrap gap-2">
+                {svc.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-medium px-3 py-1 rounded-full border border-white/10 text-white/50 group-hover:border-primary/30 group-hover:text-primary/80 transition-colors duration-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Pink dot */}
+            <div className="hidden md:flex md:w-12 shrink-0 justify-end">
+              <span className="w-3 h-3 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          </motion.div>
+        ))}
+        {/* Bottom border */}
+        <div className="border-t border-white/10" />
       </div>
     </section>
   );
