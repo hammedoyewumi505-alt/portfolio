@@ -382,15 +382,22 @@ const services = [
   },
 ];
 
-const dropIn: Variants = {
-  hidden: { opacity: 0, y: -70, scaleY: 0.85 },
+// Items converge from opposite sides — odd rows from left, even from right
+const converge: Variants = {
+  hidden: (i: number) => ({
+    opacity: 0,
+    x: i % 2 === 0 ? -120 : 120,
+    y: -30,
+    scale: 0.92,
+  }),
   visible: (i: number) => ({
     opacity: 1,
+    x: 0,
     y: 0,
-    scaleY: 1,
+    scale: 1,
     transition: {
-      delay: i * 0.12,
-      duration: 0.65,
+      delay: i * 0.1,
+      duration: 0.75,
       ease: [0.22, 1, 0.36, 1],
     },
   }),
@@ -427,7 +434,7 @@ function ServicesSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
-            variants={dropIn}
+            variants={converge}
             className="group border-t border-white/10 py-7 md:py-10 flex flex-col md:flex-row md:items-center gap-4 md:gap-0 hover:border-primary/40 transition-colors duration-300 cursor-default"
           >
             {/* Number */}
