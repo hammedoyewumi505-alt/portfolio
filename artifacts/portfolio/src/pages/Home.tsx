@@ -14,6 +14,7 @@ import project3 from '@assets/wordpilot_1785019235115.png';
 export default function Home() {
   return (
     <div className="bg-background min-h-screen text-foreground selection:bg-primary selection:text-white">
+      <Navbar />
       <HeroSection />
       <TickerSection />
       <ProjectsSection />
@@ -38,6 +39,73 @@ const staggerContainer: Variants = {
     }
   }
 };
+
+function Navbar() {
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const links = [
+    { label: 'Services', href: '#services' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Contact', href: '#contact' },
+  ];
+
+  return (
+    <motion.header
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-3'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#" className="text-white font-bold text-xl tracking-widest uppercase">
+          Hall<span className="text-primary">ins</span>
+        </a>
+
+        {/* Nav links */}
+        <nav className="hidden md:flex items-center gap-10">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm font-medium text-white/70 hover:text-white transition-colors tracking-wide"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA button */}
+        <a
+          href="#contact"
+          className="hidden md:flex items-center gap-2 border border-white/30 hover:border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary hover:border-primary group"
+        >
+          Let's Talk
+          <FiArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </a>
+
+        {/* Mobile menu button (simple) */}
+        <button className="md:hidden text-white">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </motion.header>
+  );
+}
 
 function HeroSection() {
   return (
