@@ -41,7 +41,7 @@ const staggerContainer: Variants = {
 
 function HeroSection() {
   return (
-    <section className="relative w-full min-h-[100dvh] flex items-center justify-center pt-20 pb-12 overflow-hidden px-6 md:px-12">
+    <section className="relative w-full min-h-[100dvh] flex items-center justify-center pt-20 pb-0 overflow-hidden px-6 md:px-12">
       {/* Top Left Badge */}
       <motion.div 
         initial={{ opacity: 0, x: -20 }}
@@ -69,31 +69,38 @@ function HeroSection() {
         </motion.h1>
       </div>
 
-      {/* Photo */}
+      {/* Dark gradient overlay at the bottom — hides HALLINS text behind the info block */}
+      <div
+        className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
+        style={{ height: '55%', background: 'linear-gradient(to top, #000000 30%, rgba(0,0,0,0.85) 65%, transparent 100%)' }}
+      />
+
+      {/* Photo — tall, flush to bottom, sits above gradient */}
       <motion.div 
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        className="relative z-10 w-full max-w-lg md:max-w-2xl lg:max-w-3xl flex justify-center items-end h-[60vh] md:h-[75vh]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex justify-center items-end"
+        style={{ height: '92%', width: 'auto', maxWidth: '680px' }}
       >
         <img 
           src={photo} 
           alt="Hallins" 
-          className="object-contain h-full w-auto grayscale contrast-125 hover:grayscale-0 transition-all duration-700 ease-in-out drop-shadow-2xl"
-          style={{ filter: "drop-shadow(0 0 40px rgba(255, 50, 120, 0.2)) grayscale(100%)" }}
-          onMouseEnter={(e) => e.currentTarget.style.filter = "drop-shadow(0 0 60px rgba(255, 50, 120, 0.4)) grayscale(0%)"}
-          onMouseLeave={(e) => e.currentTarget.style.filter = "drop-shadow(0 0 40px rgba(255, 50, 120, 0.2)) grayscale(100%)"}
+          className="h-full w-auto object-contain transition-all duration-700 ease-in-out"
+          style={{ filter: "drop-shadow(0 0 40px rgba(255, 50, 120, 0.25)) grayscale(100%)" }}
+          onMouseEnter={(e) => e.currentTarget.style.filter = "drop-shadow(0 0 60px rgba(255, 50, 120, 0.5)) grayscale(0%)"}
+          onMouseLeave={(e) => e.currentTarget.style.filter = "drop-shadow(0 0 40px rgba(255, 50, 120, 0.25)) grayscale(100%)"}
         />
       </motion.div>
 
-      {/* Bottom Left Info */}
+      {/* Bottom Left Info — sits above the gradient overlay */}
       <motion.div 
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
-        className="absolute bottom-8 left-6 md:bottom-12 md:left-12 max-w-sm z-20"
+        className="absolute bottom-10 left-6 md:bottom-14 md:left-12 max-w-sm z-20"
       >
-        <motion.h2 variants={fadeUp} className="text-xl md:text-2xl font-display font-bold mb-3">
+        <motion.h2 variants={fadeUp} className="text-xl md:text-2xl font-display font-bold mb-3 text-white">
           Web Design And Full Stack Developer
         </motion.h2>
         <motion.p variants={fadeUp} className="text-muted-foreground text-sm md:text-base mb-6 leading-relaxed">
