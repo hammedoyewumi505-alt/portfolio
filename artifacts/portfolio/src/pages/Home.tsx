@@ -404,70 +404,93 @@ const converge: Variants = {
 };
 
 function ServicesSection() {
+  // Each card sticks at a slightly lower top so they fan out behind each other
+  const CARD_PEEK = 14; // px each card peeks below the one on top
+  const NAV_H = 72;     // navbar height offset
+
   return (
-    <section id="services" className="py-16 md:py-24 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto relative z-10 bg-background">
-      {/* Header */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
-        variants={fadeUp}
-        className="mb-12 md:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
-      >
-        <div>
-          <p className="text-primary text-xs font-medium tracking-widest uppercase mb-3">— My Services</p>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold leading-tight">
-            How I Help<br className="hidden sm:block" /> You Grow
-          </h2>
-        </div>
-        <p className="text-muted-foreground text-sm md:text-base max-w-xs leading-relaxed">
-          Everything you need to establish a powerful digital presence — under one roof.
-        </p>
-      </motion.div>
+    <section id="services" className="relative z-10 bg-background">
+      {/* Header — scrolls away normally */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 md:pt-24 pb-10 md:pb-14">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={fadeUp}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+        >
+          <div>
+            <p className="text-primary text-xs font-medium tracking-widest uppercase mb-3">— My Services</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold leading-tight">
+              How I Help<br className="hidden sm:block" /> You Grow
+            </h2>
+          </div>
+          <p className="text-muted-foreground text-sm md:text-base max-w-xs leading-relaxed">
+            Everything you need to establish a powerful digital presence — under one roof.
+          </p>
+        </motion.div>
+      </div>
 
-      {/* Service rows */}
-      <div className="flex flex-col origin-top">
+      {/* Stacking cards — each card is sticky and slides over the previous */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pb-32">
         {services.map((svc, i) => (
-          <motion.div
+          <div
             key={svc.number}
-            custom={i}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={converge}
-            className="group border-t border-white/10 py-7 md:py-10 flex flex-col md:flex-row md:items-center gap-4 md:gap-0 hover:border-primary/40 transition-colors duration-300 cursor-default"
+            className="sticky"
+            style={{ top: `${NAV_H + i * CARD_PEEK}px`, zIndex: 10 + i }}
           >
-            {/* Number */}
-            <span className="text-xs font-mono text-muted-foreground/50 md:w-16 shrink-0">{svc.number}</span>
+            <motion.div
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-40px' }}
+              variants={converge}
+              className="rounded-2xl border border-white/10 overflow-hidden mb-4"
+              style={{
+                background: `linear-gradient(135deg, #0f0f0f 0%, #141414 100%)`,
+                boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
+              }}
+            >
+              <div className="p-6 sm:p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-0">
+                {/* Number + accent bar */}
+                <div className="flex items-center gap-4 md:w-20 shrink-0">
+                  <div className="w-1 h-10 bg-primary rounded-full" />
+                  <span className="text-xs font-mono text-primary/70 font-bold">{svc.number}</span>
+                </div>
 
-            {/* Title */}
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight md:flex-1 group-hover:text-primary transition-colors duration-300">
-              {svc.title}
-            </h3>
+                {/* Title */}
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight md:flex-1 leading-tight">
+                  {svc.title}
+                </h3>
 
-            {/* Right col: desc + tags */}
-            <div className="md:w-[340px] lg:w-[400px] shrink-0 flex flex-col gap-3">
-              <p className="text-muted-foreground text-sm leading-relaxed">{svc.desc}</p>
-              <div className="flex flex-wrap gap-2">
-                {svc.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-medium px-3 py-1 rounded-full border border-white/10 text-white/50 group-hover:border-primary/30 group-hover:text-primary/80 transition-colors duration-300"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {/* Desc + tags */}
+                <div className="md:w-[320px] lg:w-[380px] shrink-0 flex flex-col gap-3 md:pl-8 md:border-l md:border-white/10">
+                  <p className="text-muted-foreground text-sm leading-relaxed">{svc.desc}</p>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {svc.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Arrow */}
+                <div className="hidden md:flex md:w-14 shrink-0 justify-end">
+                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30">
+                    <FiArrowUpRight size={16} />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Pink dot */}
-            <div className="hidden md:flex md:w-12 shrink-0 justify-end">
-              <span className="w-3 h-3 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-          </motion.div>
+              {/* Bottom pink line accent */}
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+            </motion.div>
+          </div>
         ))}
-        {/* Bottom border */}
-        <div className="border-t border-white/10" />
       </div>
     </section>
   );
