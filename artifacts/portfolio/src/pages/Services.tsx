@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { motion, Variants } from 'framer-motion';
-import { Link } from 'wouter';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
-  FiArrowUpRight, FiArrowLeft, FiCheck, FiChevronDown,
+  FiArrowUpRight, FiCheck, FiChevronDown,
   FiMonitor, FiCode, FiLayout, FiSmartphone,
+  FiX, FiMenu,
 } from 'react-icons/fi';
-import { SiFiverr, SiUpwork } from 'react-icons/si';
+import { SiFiverr, SiUpwork, SiTiktok, SiFacebook } from 'react-icons/si';
 
 /* ─── ANIMATION VARIANTS ─── */
 const fadeUp: Variants = {
@@ -174,32 +174,119 @@ export default function Services() {
 
 /* ─── NAV ─── */
 function ServicesNav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleLinkClick = () => setMenuOpen(false);
+
+  const links = [
+    { label: 'Services', href: '/services' },
+    { label: 'Projects', href: '/#projects' },
+    { label: 'Contact', href: '/#contact' },
+  ];
+
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 py-4"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group"
-        >
-          <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-          Back to Home
-        </Link>
+    <>
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled || menuOpen
+            ? 'bg-black/90 backdrop-blur-md border-b border-white/10 py-3'
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between md:justify-center relative">
+          {/* Available badge — desktop left */}
+          <div className="hidden md:flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full absolute left-6 md:left-12">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            </span>
+            <span className="text-xs font-medium tracking-wide text-white/80">Available for New Project</span>
+          </div>
 
-        <span className="font-display font-bold tracking-widest text-white text-lg">HALLINS</span>
+          {/* Desktop nav links — centered */}
+          <nav className="hidden md:flex items-center gap-10">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`text-sm font-medium transition-colors tracking-wide ${
+                  link.href === '/services' ? 'text-white' : 'text-white/70 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-        <a
-          href="#contact-cta"
-          className="flex items-center gap-2 bg-primary text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-primary/80 transition-colors"
-        >
-          Let's Talk <FiArrowUpRight />
-        </a>
-      </div>
-    </motion.header>
+          {/* Desktop CTA */}
+          <a
+            href="#contact-cta"
+            className="hidden md:flex items-center gap-2 bg-primary border border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary/80 group absolute right-6 md:right-12"
+          >
+            Let's Talk
+            <FiArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+
+          {/* Mobile: Let's Talk + Hamburger */}
+          <div className="flex md:hidden items-center gap-3 ml-auto">
+            <a
+              href="#contact-cta"
+              className="flex items-center gap-1.5 bg-primary text-white text-xs font-medium px-4 py-2 rounded-full"
+            >
+              Let's Talk
+            </a>
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="text-white p-1"
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-[56px] left-0 right-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10 flex flex-col items-center gap-0 py-4 md:hidden"
+          >
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={handleLinkClick}
+                className="w-full text-center py-4 text-base font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors tracking-wide"
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="flex gap-5 mt-4 pb-2">
+              <a href="https://www.fiverr.com/hall_ket" target="_blank" rel="noreferrer" className="text-white/60 hover:text-primary transition-colors"><SiFiverr size={20} /></a>
+              <a href="https://www.upwork.com/freelancers/~0151b31429614d36ea?mp_source=share" target="_blank" rel="noreferrer" className="text-white/60 hover:text-primary transition-colors"><SiUpwork size={20} /></a>
+              <a href="https://www.tiktok.com/@hallinsdev" target="_blank" rel="noreferrer" className="text-white/60 hover:text-primary transition-colors"><SiTiktok size={20} /></a>
+              <a href="https://www.facebook.com/profile.php?id=61569828302942" target="_blank" rel="noreferrer" className="text-white/60 hover:text-primary transition-colors"><SiFacebook size={20} /></a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
