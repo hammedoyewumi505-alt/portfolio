@@ -6,10 +6,10 @@ import { FaStar } from 'react-icons/fa6';
 
 import photo from '@assets/file_00000000a20471f4bb4d9534d7debaeb-removebg-preview_1785015317881.png';
 
-// Import generated images
-import project1 from '../../attached_assets/generated_images/project1.png';
-import project2 from '../../attached_assets/generated_images/project2.png';
-import project3 from '../../attached_assets/generated_images/project3.png';
+// Import project screenshots
+import project1 from '@assets/image_1785018277477.png';
+import project2 from '@assets/image_1785018309537.png';
+import project3 from '@assets/image_1785018372780.png';
 
 export default function Home() {
   return (
@@ -177,19 +177,22 @@ function ProjectsSection() {
       title: "Revesto Realtor",
       desc: "Commercial real estate website for booking property tours and contacting agents.",
       tags: ["Real Estate", "Web Design", "Responsive"],
-      image: project1
+      image: project1,
+      objectPosition: "0 16%"   // crops Chrome browser chrome from top, taskbar from bottom
     },
     {
       title: "GEDA",
       desc: "Eswatini's Discovery Platform, a web app built using no-code tools.",
       tags: ["No-Code", "Web App", "Discovery Platform"],
-      image: project2
+      image: project2,
+      objectPosition: "0 24%"   // crops Chrome + Base44 editor toolbar from top
     },
     {
       title: "WordPilot AI",
       desc: "An AI-powered blog writing tool built with a modern web builder.",
       tags: ["AI", "SaaS", "Blog Tool"],
-      image: project3
+      image: project3,
+      objectPosition: "0 22%"   // crops Chrome + Base44 editor toolbar from top
     }
   ];
 
@@ -214,14 +217,12 @@ function ProjectsSection() {
             variants={fadeUp}
             className={`group flex flex-col bg-card border border-card-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(255,50,120,0.15)] ${i === 2 ? 'md:col-span-2 md:flex-row' : ''}`}
           >
-            <div className={`overflow-hidden bg-[#1a1a1a] p-8 flex items-center justify-center ${i === 2 ? 'md:w-1/2' : 'h-[300px] md:h-[400px]'}`}>
+            <div className={`overflow-hidden bg-[#1a1a1a] flex items-center justify-center ${i === 2 ? 'md:w-1/2' : 'h-[300px] md:h-[400px]'}`}>
               <img 
                 src={proj.image} 
                 alt={proj.title} 
-                className="w-full h-full object-cover rounded-lg shadow-2xl group-hover:scale-105 transition-transform duration-700 ease-out"
-                onError={(e) => {
-                  e.currentTarget.src = `https://placehold.co/800x600/111/fff?text=${encodeURIComponent(proj.title)}`;
-                }}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                style={{ objectPosition: proj.objectPosition }}
               />
             </div>
             <div className={`p-8 flex flex-col justify-center ${i === 2 ? 'md:w-1/2' : ''}`}>
