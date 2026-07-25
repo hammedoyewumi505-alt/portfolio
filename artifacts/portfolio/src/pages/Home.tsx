@@ -199,12 +199,13 @@ function HeroSection() {
         />
       </motion.div>
 
-      {/* Available badge — floats just above the info block, near HALLINS */}
+      {/* Available badge — sits just above the top of the HALLINS text */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-[210px] sm:bottom-[230px] md:bottom-[260px] left-4 md:left-12 flex items-center gap-2 bg-black/40 border border-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full z-20"
+        className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/40 border border-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full z-20 whitespace-nowrap"
+        style={{ top: 'calc(50% - 11vw)' }}
       >
         <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
