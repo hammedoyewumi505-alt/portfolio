@@ -54,7 +54,7 @@ function Navbar() {
   const handleLinkClick = () => setMenuOpen(false);
 
   const links = [
-    { label: 'Services', href: '#services' },
+    { label: 'Services', href: '/services' },
     { label: 'Projects', href: '#projects' },
     { label: 'Contact', href: '#contact' },
   ];
