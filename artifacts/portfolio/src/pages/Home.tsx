@@ -88,7 +88,7 @@ function Navbar() {
         {/* CTA button */}
         <a
           href="#contact"
-          className="hidden md:flex items-center gap-2 border border-white/30 hover:border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary hover:border-primary group"
+          className="hidden md:flex items-center gap-2 bg-primary border border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary/80 group"
         >
           Let's Talk
           <FiArrowUpRight className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
