@@ -533,60 +533,95 @@ function TestimonialsSection() {
   if (!isMobile && visible.length === 1) visible.push(testimonials[0]);
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 md:px-12 w-full relative z-10 bg-background sticky top-0 min-h-screen flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto w-full">
+    <section className="relative z-10 bg-background sticky top-0 min-h-screen flex flex-col justify-center overflow-hidden py-16 md:py-24">
+
+      {/* Ambient glow blobs */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] opacity-60" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[100px] opacity-50" />
+        <div className="absolute top-1/2 left-0 w-[300px] h-[300px] rounded-full bg-purple-600/10 blur-[80px] opacity-40" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12">
+
+        {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 md:mb-16 gap-4">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-3xl sm:text-4xl md:text-6xl font-display font-bold"
-          >
-            What Clients Say
-          </motion.h2>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            <p className="text-primary text-xs font-medium tracking-widest uppercase mb-3">— Testimonials</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-bold">
+              What Clients Say
+            </h2>
+          </motion.div>
+
           <div className="flex gap-3">
             <button
               onClick={prev}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors text-lg"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-primary/20 hover:border-primary/40 transition-all text-lg"
             >
               <FiChevronLeft />
             </button>
             <button
               onClick={next}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors text-lg"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-primary/20 hover:border-primary/40 transition-all text-lg"
             >
               <FiChevronRight />
             </button>
           </div>
         </div>
 
-        <div className="min-h-[280px] md:min-h-[300px] relative">
+        {/* Cards */}
+        <div className="min-h-[300px] md:min-h-[340px] relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              exit={{ opacity: 0, x: -60 }}
+              transition={{ duration: 0.45, ease: 'easeInOut' }}
               className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8"
             >
               {visible.map((t, i) => (
                 <div
                   key={i}
-                  className="bg-card border-l-4 border-l-primary border border-card-border p-6 md:p-10 rounded-r-2xl rounded-l-sm shadow-xl flex flex-col"
+                  className="relative rounded-2xl p-[1px] overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255,50,120,0.35) 0%, rgba(255,255,255,0.05) 50%, rgba(255,50,120,0.1) 100%)',
+                  }}
                 >
-                  <div className="flex text-yellow-400 mb-4 md:mb-6 gap-1 text-sm">
-                    {[...Array(t.rating)].map((_, j) => <FaStar key={j} />)}
-                  </div>
-                  <p className="text-base md:text-xl leading-relaxed text-muted-foreground mb-6 md:mb-8 italic flex-grow">
-                    "{t.text}"
-                  </p>
-                  <div className="flex items-center justify-between mt-auto">
-                    <h4 className="font-display font-bold text-base md:text-lg">{t.name}</h4>
-                    <span className={`${t.color} text-white text-xs font-bold px-3 py-1 rounded-full`}>
-                      {t.platform}
-                    </span>
+                  {/* Glass card body */}
+                  <div className="relative rounded-2xl bg-white/5 backdrop-blur-xl p-6 md:p-9 flex flex-col h-full overflow-hidden">
+                    {/* Inner shine */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Quote mark */}
+                    <span className="absolute top-5 right-6 text-6xl md:text-8xl font-display font-bold text-primary/10 leading-none select-none">"</span>
+
+                    {/* Stars */}
+                    <div className="flex text-yellow-400 mb-5 gap-1 text-sm relative z-10">
+                      {[...Array(t.rating)].map((_, j) => <FaStar key={j} />)}
+                    </div>
+
+                    {/* Quote text */}
+                    <p className="text-sm md:text-base leading-relaxed text-white/75 mb-8 italic flex-grow relative z-10">
+                      "{t.text}"
+                    </p>
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between mt-auto relative z-10 pt-5 border-t border-white/10">
+                      <div className="flex items-center gap-3">
+                        {/* Avatar initial */}
+                        <div className="w-9 h-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary font-bold text-sm">
+                          {t.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h4 className="font-display font-bold text-sm md:text-base text-white">{t.name}</h4>
+                          <p className="text-xs text-white/40">Verified client</p>
+                        </div>
+                      </div>
+                      <span className={`${t.color} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg`}>
+                        {t.platform}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -594,14 +629,14 @@ function TestimonialsSection() {
           </AnimatePresence>
         </div>
 
-        {/* Dots indicator */}
-        <div className="flex justify-center gap-2 mt-8">
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-10">
           {Array.from({ length: Math.ceil(testimonials.length / perPage) }).map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i * perPage)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                Math.floor(index / perPage) === i ? 'bg-primary w-6' : 'bg-white/20 w-2'
+                Math.floor(index / perPage) === i ? 'bg-primary w-8' : 'bg-white/20 w-2'
               }`}
             />
           ))}
