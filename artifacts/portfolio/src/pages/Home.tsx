@@ -67,11 +67,6 @@ function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="text-white font-bold text-xl tracking-widest uppercase">
-          Hall<span className="text-primary">ins</span>
-        </a>
-
         {/* Nav links */}
         <nav className="hidden md:flex items-center gap-10">
           {links.map((link) => (
