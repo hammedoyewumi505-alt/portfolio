@@ -204,14 +204,16 @@ function ServicesNav() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between md:justify-center relative">
-          {/* Available badge — desktop left */}
-          <div className="hidden md:flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full absolute left-6 md:left-12">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-            </span>
-            <span className="text-xs font-medium tracking-wide text-white/80">Available for New Project</span>
-          </div>
+          {/* HD Logo — left, links to home */}
+          <a
+            href="/"
+            className="absolute left-6 md:left-12 flex items-center select-none group"
+            aria-label="Hallins Dev — Home"
+          >
+            <span className="font-display font-bold text-2xl leading-none text-primary group-hover:opacity-80 transition-opacity">H</span>
+            <span className="font-display font-bold text-2xl leading-none text-white group-hover:opacity-80 transition-opacity">D</span>
+            <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-primary mb-0.5 self-end group-hover:scale-125 transition-transform" />
+          </a>
 
           {/* Desktop nav links — centered */}
           <nav className="hidden md:flex items-center gap-10">
