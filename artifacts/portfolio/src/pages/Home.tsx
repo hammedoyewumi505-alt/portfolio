@@ -196,15 +196,18 @@ function HeroSection() {
 
 function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
   return (
-    <a
-      href={href}
-      target="_blank"
+    <a 
+      href={href} 
+      target="_blank" 
       rel="noreferrer"
-      className="group flex items-center gap-2.5 text-white/50 hover:text-white transition-colors duration-300"
+      className="group flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
     >
-      <span className="text-base group-hover:text-primary transition-colors duration-300">{icon}</span>
-      <span className="text-xs font-medium tracking-widest uppercase">{label}</span>
-      <FiArrowUpRight className="text-xs opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+      <div className="w-10 h-10 rounded-full bg-secondary/50 border border-border flex items-center justify-center group-hover:border-primary/50 transition-colors">
+        {icon}
+      </div>
+      <span className="text-xs font-medium tracking-widest uppercase rotate-180" style={{ writingMode: 'vertical-rl' }}>
+        {label}
+      </span>
     </a>
   );
 }
