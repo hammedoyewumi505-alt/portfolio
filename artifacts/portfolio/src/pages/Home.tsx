@@ -7,9 +7,9 @@ import { FaStar } from 'react-icons/fa6';
 import photo from '@assets/file_00000000a20471f4bb4d9534d7debaeb-removebg-preview_1785015317881.png';
 
 // Import project screenshots
-import project1 from '@assets/image_1785018277477.png';
-import project2 from '@assets/image_1785018309537.png';
-import project3 from '@assets/image_1785018372780.png';
+import project1 from '@assets/revesto_1785019235113.png';
+import project2 from '@assets/geda_1785019235107.png';
+import project3 from '@assets/wordpilot_1785019235115.png';
 
 export default function Home() {
   return (
@@ -178,21 +178,21 @@ function ProjectsSection() {
       desc: "Commercial real estate website for booking property tours and contacting agents.",
       tags: ["Real Estate", "Web Design", "Responsive"],
       image: project1,
-      objectPosition: "0 16%"   // crops Chrome browser chrome from top, taskbar from bottom
+      objectPosition: "0 0%"
     },
     {
       title: "GEDA",
       desc: "Eswatini's Discovery Platform, a web app built using no-code tools.",
       tags: ["No-Code", "Web App", "Discovery Platform"],
       image: project2,
-      objectPosition: "0 24%"   // crops Chrome + Base44 editor toolbar from top
+      objectPosition: "0 0%"
     },
     {
       title: "WordPilot AI",
       desc: "An AI-powered blog writing tool built with a modern web builder.",
       tags: ["AI", "SaaS", "Blog Tool"],
       image: project3,
-      objectPosition: "0 22%"   // crops Chrome + Base44 editor toolbar from top
+      objectPosition: "0 0%"
     }
   ];
 
