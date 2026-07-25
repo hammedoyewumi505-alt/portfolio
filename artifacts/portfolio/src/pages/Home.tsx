@@ -221,8 +221,7 @@ function ProjectsSection() {
               <img 
                 src={proj.image} 
                 alt={proj.title} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                style={{ objectPosition: proj.objectPosition }}
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
             <div className={`p-8 flex flex-col justify-center ${i === 2 ? 'md:w-1/2' : ''}`}>
