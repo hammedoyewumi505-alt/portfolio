@@ -71,6 +71,15 @@ function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between md:justify-center relative">
+          {/* Available badge — desktop left */}
+          <div className="hidden md:flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full absolute left-6 md:left-12">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            </span>
+            <span className="text-xs font-medium tracking-wide text-white/80">Available for New Project</span>
+          </div>
+
           {/* Desktop nav links — centered */}
           <nav className="hidden md:flex items-center gap-10">
             {links.map((link) => (
@@ -150,20 +159,6 @@ function Navbar() {
 function HeroSection() {
   return (
     <section className="relative w-full min-h-[100dvh] flex items-center justify-center pt-16 pb-0 overflow-hidden">
-      {/* Top Left Badge */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute top-20 left-4 md:top-24 md:left-12 flex items-center gap-2 bg-secondary/50 border border-border backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full z-20"
-      >
-        <span className="relative flex h-2.5 w-2.5 md:h-3 md:w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 md:h-3 md:w-3 bg-green-500"></span>
-        </span>
-        <span className="text-xs md:text-sm font-medium tracking-wide">Available for New Project</span>
-      </motion.div>
-
       {/* Main Name Background */}
       <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0">
         <motion.h1
