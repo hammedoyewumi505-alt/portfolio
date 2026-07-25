@@ -217,11 +217,11 @@ function ProjectsSection() {
             variants={fadeUp}
             className={`group flex flex-col bg-card border border-card-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(255,50,120,0.15)] ${i === 2 ? 'md:col-span-2 md:flex-row' : ''}`}
           >
-            <div className={`overflow-hidden bg-[#1a1a1a] flex items-center justify-center ${i === 2 ? 'md:w-1/2' : 'h-[300px] md:h-[400px]'}`}>
+            <div className={`overflow-hidden bg-[#1a1a1a] ${i === 2 ? 'md:w-1/2' : 'w-full'}`}>
               <img 
                 src={proj.image} 
                 alt={proj.title} 
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
             <div className={`p-8 flex flex-col justify-center ${i === 2 ? 'md:w-1/2' : ''}`}>
