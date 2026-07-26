@@ -881,7 +881,7 @@ function AboutSection() {
   ];
 
   return (
-    <section className="relative z-20 bg-[#050505] min-h-screen py-16 md:py-24 border-t border-white/5 rounded-t-[2rem] md:rounded-t-[3rem] -mt-8 md:-mt-12 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] flex items-center">
+    <section className="sticky top-0 relative z-20 bg-[#050505] min-h-screen py-16 md:py-24 border-t border-white/5 rounded-t-[2rem] md:rounded-t-[3rem] -mt-8 md:-mt-12 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
         {/* Left Content */}
