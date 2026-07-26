@@ -134,7 +134,7 @@ export default function Footer() {
                 </a>
                 <span className="inline-flex items-center gap-2 text-sm text-white/50">
                   <FiMapPin size={14} className="text-primary" />
-                  Eswatini &amp; Remote Worldwide
+                  Nigeria &amp; Remote Worldwide
                 </span>
               </div>
 
