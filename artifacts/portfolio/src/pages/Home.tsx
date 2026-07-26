@@ -101,7 +101,7 @@ function Navbar() {
 
           {/* Desktop CTA */}
           <a
-            href="#contact"
+            href="/contact"
             className="hidden md:flex items-center gap-2 bg-primary border border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary/80 group absolute right-6 md:right-12"
           >
             Let's Talk
@@ -111,7 +111,7 @@ function Navbar() {
           {/* Mobile: Let's Talk + Hamburger */}
           <div className="flex md:hidden items-center gap-3 ml-auto">
             <a
-              href="#contact"
+              href="/contact"
               className="flex items-center gap-1.5 bg-primary text-white text-xs font-medium px-4 py-2 rounded-full"
             >
               Let's Talk
@@ -537,7 +537,7 @@ function ProjectsSection() {
           className="flex justify-center mt-14 md:mt-20"
         >
           <a
-            href="#"
+            href="/projects"
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-8 py-4 font-medium text-sm border border-white/10 bg-white/5 backdrop-blur-sm hover:border-primary/50 transition-colors duration-300"
           >
             <span className="relative z-10">View All Projects</span>

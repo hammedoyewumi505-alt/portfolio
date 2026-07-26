@@ -459,7 +459,7 @@ export default function Contact() {
                 rating="5.0"
                 reviews="40+"
                 cta="View Fiverr Profile"
-                href="https://www.fiverr.com"
+                href="https://www.fiverr.com/hall_ket"
               />
 
               <FreelanceCard
@@ -470,7 +470,7 @@ export default function Contact() {
                 rating="5.0"
                 reviews="20+"
                 cta="View Upwork Profile"
-                href="https://www.upwork.com"
+                href="https://www.upwork.com/freelancers/~0151b31429614d36ea?mp_source=share"
               />
             </motion.div>
           </div>

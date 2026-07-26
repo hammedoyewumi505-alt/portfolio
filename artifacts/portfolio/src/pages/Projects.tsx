@@ -130,7 +130,7 @@ function ProjectsNav() {
 
           {/* Desktop CTA */}
           <a
-            href="/#contact"
+            href="/contact"
             className="hidden md:flex items-center gap-2 bg-primary border border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary/80 group absolute right-6 md:right-12"
           >
             Let's Talk
@@ -139,7 +139,7 @@ function ProjectsNav() {
 
           {/* Mobile */}
           <div className="flex md:hidden items-center gap-3 ml-auto">
-            <a href="/#contact" className="flex items-center gap-1.5 bg-primary text-white text-xs font-medium px-4 py-2 rounded-full">
+            <a href="/contact" className="flex items-center gap-1.5 bg-primary text-white text-xs font-medium px-4 py-2 rounded-full">
               Let's Talk
             </a>
             <button onClick={() => setMenuOpen(v => !v)} className="text-white p-1" aria-label="Toggle menu">
@@ -462,7 +462,7 @@ function ProjectsCTA() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="/#contact"
+            href="/contact"
             className="group inline-flex items-center justify-center gap-2 bg-primary text-white font-medium px-8 py-4 rounded-full hover:bg-primary/80 transition-colors"
           >
             Let's Talk

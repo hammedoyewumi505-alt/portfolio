@@ -254,7 +254,7 @@ function ServicesNav() {
 
           {/* Desktop CTA */}
           <a
-            href="#contact-cta"
+            href="/contact"
             className="hidden md:flex items-center gap-2 bg-primary border border-primary text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-primary/80 group absolute right-6 md:right-12"
           >
             Let's Talk
@@ -264,7 +264,7 @@ function ServicesNav() {
           {/* Mobile: Let's Talk + Hamburger */}
           <div className="flex md:hidden items-center gap-3 ml-auto">
             <a
-              href="#contact-cta"
+              href="/contact"
               className="flex items-center gap-1.5 bg-primary text-white text-xs font-medium px-4 py-2 rounded-full"
             >
               Let's Talk
@@ -464,7 +464,7 @@ function ServiceBlock({ svc, index }: { svc: typeof services[0]; index: number }
             </div>
 
             <a
-              href="#contact-cta"
+              href="/contact"
               className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3 rounded-full transition-all duration-300 hover:opacity-90"
               style={{ background: svc.color }}
             >
@@ -688,7 +688,7 @@ function CTASection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="mailto:hallins@example.com"
+              href="mailto:developerhallins@gmail.com"
               className="inline-flex items-center gap-2 bg-primary text-white font-medium px-8 py-4 rounded-full hover:bg-primary/85 transition-colors shadow-[0_0_30px_rgba(255,50,120,0.4)]"
             >
               Send Me a Message <FiArrowUpRight />

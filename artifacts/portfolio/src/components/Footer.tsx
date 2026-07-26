@@ -15,8 +15,9 @@ const nav = [
     heading: 'Pages',
     links: [
       { label: 'Home',     href: '/' },
-      { label: 'Projects', href: '/projects' },
       { label: 'Services', href: '/services' },
+      { label: 'Projects', href: '/projects' },
+      { label: 'Contact',  href: '/contact' },
     ],
   },
   {
@@ -26,6 +27,7 @@ const nav = [
       { label: 'Web Development',  href: '/services' },
       { label: 'Landing Pages',    href: '/services' },
       { label: 'Mobile Apps',      href: '/services' },
+      { label: 'AI Development',   href: '/services' },
     ],
   },
   {
