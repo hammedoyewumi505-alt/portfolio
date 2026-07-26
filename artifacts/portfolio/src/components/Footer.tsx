@@ -86,7 +86,7 @@ export default function Footer() {
             className="flex flex-col sm:flex-row gap-4 shrink-0"
           >
             <a
-              href="mailto:hallinsdev@gmail.com"
+              href="mailto:developerhallins@gmail.com"
               className="group inline-flex items-center gap-2 bg-primary text-white font-medium text-sm px-6 py-3.5 rounded-full hover:bg-primary/80 transition-colors"
             >
               <FiMail size={15} />
@@ -124,11 +124,11 @@ export default function Footer() {
               {/* Contact info */}
               <div className="flex flex-col gap-2.5 mb-7">
                 <a
-                  href="mailto:hallinsdev@gmail.com"
+                  href="mailto:developerhallins@gmail.com"
                   className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-primary transition-colors group"
                 >
                   <FiMail size={14} className="text-primary" />
-                  hallinsdev@gmail.com
+                  developerhallins@gmail.com
                 </a>
                 <span className="inline-flex items-center gap-2 text-sm text-white/50">
                   <FiMapPin size={14} className="text-primary" />

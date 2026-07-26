@@ -756,7 +756,7 @@ function TestimonialsSection() {
   if (!isMobile && visible.length === 1) visible.push(testimonials[0]);
 
   return (
-    <section className="relative z-10 bg-background sticky top-0 min-h-screen flex flex-col justify-center overflow-hidden py-16 md:py-24">
+    <section className="relative z-10 bg-background min-h-screen flex flex-col justify-center overflow-hidden py-16 md:py-24">
 
       {/* Ambient glow blobs */}
       <div className="pointer-events-none absolute inset-0">
