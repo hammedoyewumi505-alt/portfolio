@@ -343,7 +343,7 @@ function ProjectsHero() {
           initial={{ y: '100%' }}
           animate={{ y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="font-display font-bold text-5xl sm:text-7xl md:text-[9rem] leading-none tracking-tight"
+          className="font-display font-bold text-4xl sm:text-6xl md:text-[9rem] leading-none tracking-tight"
         >
           Featured
         </motion.h1>
@@ -355,7 +355,7 @@ function ProjectsHero() {
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-            className="font-display font-bold text-5xl sm:text-7xl md:text-[9rem] leading-none tracking-tight text-outline"
+            className="font-display font-bold text-4xl sm:text-6xl md:text-[9rem] leading-none tracking-tight text-outline"
           >
             Projects
           </motion.h1>

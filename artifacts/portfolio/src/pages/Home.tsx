@@ -254,14 +254,14 @@ function HeroSection() {
       </motion.div>
 
       {/* ── Bottom-left info — each line drops in cascade ── */}
-      <div className="absolute bottom-6 left-4 md:bottom-14 md:left-12 max-w-[280px] sm:max-w-xs md:max-w-sm z-20">
+      <div className="absolute bottom-6 left-4 md:bottom-14 md:left-12 max-w-[300px] sm:max-w-xs md:max-w-sm z-20">
         <motion.h2
           initial={{ opacity: 0, y: -60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring(0.32, 130, 20)}
-          className="text-base sm:text-xl md:text-2xl font-display font-bold mb-2 md:mb-3 text-white"
+          className="text-sm sm:text-xl md:text-2xl font-display font-bold mb-2 md:mb-3 text-white leading-snug"
         >
-          Web Design And Full Stack Developer
+          Web Designer & Full Stack Developer
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: -50 }}
