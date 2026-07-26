@@ -968,9 +968,9 @@ function AboutSection() {
           <motion.a
             variants={fadeUp}
             href="/contact"
-            className="flex items-center gap-3 bg-primary text-primary-foreground px-6 py-3 md:px-8 md:py-4 rounded-full text-sm md:text-base font-medium hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(255,50,120,0.4)]"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(255,50,120,0.4)]"
           >
-            Hire Me <FiArrowUpRight />
+            Hire Me <FiArrowUpRight size={14} />
           </motion.a>
         </motion.div>
 
