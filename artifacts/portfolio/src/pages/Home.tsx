@@ -965,12 +965,13 @@ function AboutSection() {
             ))}
           </motion.div>
 
-          <motion.button
+          <motion.a
             variants={fadeUp}
+            href="/contact"
             className="flex items-center gap-3 bg-primary text-primary-foreground px-6 py-3 md:px-8 md:py-4 rounded-full text-sm md:text-base font-medium hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(255,50,120,0.4)]"
           >
-            Download CV <FiDownload />
-          </motion.button>
+            Hire Me <FiArrowUpRight />
+          </motion.a>
         </motion.div>
 
         {/* Right Photo */}
