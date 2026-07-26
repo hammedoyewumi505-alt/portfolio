@@ -16,7 +16,7 @@ const allProjects = [
     number: '01',
     title: 'Revesto Realtor',
     category: 'Web Design',
-    year: '2024',
+    year: '2025',
     desc: 'A high-end commercial real estate platform designed to convert browsers into booked tours. Features a clean property catalogue, agent contact flows, live availability, and a fully responsive layout built to instil trust at first scroll — every element engineered around the buyer journey.',
     tags: ['Real Estate', 'Web Design', 'Responsive', 'UI/UX'],
     image: project1,
@@ -26,7 +26,7 @@ const allProjects = [
     number: '02',
     title: 'GEDA',
     category: 'Web App',
-    year: '2024',
+    year: '2025',
     desc: "Eswatini's first unified discovery platform — a no-code web app that surfaces local businesses, events, and experiences for both residents and tourists. Built to give an entire country a digital identity it never had before, with a clean, accessible interface designed for low-bandwidth environments.",
     tags: ['No-Code', 'Web App', 'Discovery', 'Platform'],
     image: project2,
@@ -36,7 +36,7 @@ const allProjects = [
     number: '03',
     title: 'WordPilot AI',
     category: 'SaaS',
-    year: '2024',
+    year: '2026',
     desc: 'An AI-powered SaaS blog tool that drafts, edits, and schedules long-form content in seconds. Built on a modern no-code stack with OpenAI under the hood — giving solo creators and marketing teams the output of an entire content department at a fraction of the cost.',
     tags: ['AI', 'SaaS', 'Blog Tool', 'Automation'],
     image: project3,
@@ -46,7 +46,7 @@ const allProjects = [
     number: '04',
     title: 'PPO Advisors',
     category: 'Landing Page',
-    year: '2025',
+    year: '2026',
     desc: 'A conversion-focused website for a U.S. dental PPO consulting firm. The bold hero, teal brand system, and dual CTA strategy were engineered to turn skeptical practice owners into booked discovery calls within seconds. Every section is built around one goal: reduce friction, drive action.',
     tags: ['Healthcare', 'Landing Page', 'Consulting', 'CRO'],
     image: project4,
@@ -56,7 +56,7 @@ const allProjects = [
     number: '05',
     title: 'Nexus Advisory',
     category: 'Brand Design',
-    year: '2025',
+    year: '2026',
     desc: 'A sophisticated B2B strategy consulting brand built for mid-market credibility. Editorial typography, a restrained navy-and-gold palette, and a cinematic office hero communicate authority before a single word is read — because in consulting, the brand is the first pitch.',
     tags: ['B2B', 'Consulting', 'Brand', 'Editorial'],
     image: project5,
@@ -66,12 +66,13 @@ const allProjects = [
     number: '06',
     title: 'Blaze FC',
     category: 'Sports & Community',
-    year: '2025',
+    year: '2026',
     desc: "A high-energy sports club website for a football academy with 9,000+ active members. Aggressive full-bleed hero, neon green accents, and real-time coach availability widgets make every visitor feel the adrenaline before they sign up. Built to recruit, retain, and inspire.",
     tags: ['Sports', 'Community', 'Web Design', 'Animation'],
     image: project6,
     accent: '#84cc16',
   },
+
 ];
 
 /* ─── NAV ─── */
@@ -372,7 +373,7 @@ function ProjectsHero() {
             <span className="font-mono text-xs text-primary">{String(allProjects.length).padStart(2, '0')}</span>
             <span className="text-xs text-white/30">projects</span>
             <span className="flex-1 h-px bg-white/10" />
-            <span className="text-xs text-white/30">2024 – 2025</span>
+            <span className="text-xs text-white/30">2025 – 2026</span>
           </div>
         </motion.div>
       </div>
