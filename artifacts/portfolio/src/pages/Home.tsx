@@ -162,33 +162,70 @@ function Navbar() {
 }
 
 /* ─── HERO ─── */
+// Module-scope: tracks whether the splash has already played so that
+// navigating back to "/" doesn't re-add the splash-length delay.
+let heroHasAnimated = false;
+
 function HeroSection() {
+  // On first mount the splash is still covering the screen (~1.9 s until it's gone).
+  // Subsequent visits: no extra delay.
+  const d = heroHasAnimated ? 0 : 1.85;
+
+  useEffect(() => {
+    heroHasAnimated = true;
+  }, []);
+
+  // Shared spring config for the "drop and land" feel
+  const spring = (delay: number, stiffness = 110, damping = 18) => ({
+    type: 'spring' as const,
+    stiffness,
+    damping,
+    delay: d + delay,
+  });
+
+  const socials = [
+    { href: 'https://www.fiverr.com/hall_ket',                                        icon: <SiFiverr />,   label: 'Fiverr'   },
+    { href: 'https://www.upwork.com/freelancers/~0151b31429614d36ea?mp_source=share', icon: <SiUpwork />,   label: 'Upwork'   },
+    { href: 'https://www.tiktok.com/@hallinsdev',                                     icon: <SiTiktok />,   label: 'TikTok'   },
+    { href: 'https://www.facebook.com/profile.php?id=61569828302942',                 icon: <SiFacebook />, label: 'Facebook' },
+  ];
+
   return (
     <section className="relative w-full min-h-[100dvh] flex items-center justify-center pt-16 pb-0 overflow-hidden">
-      {/* Main Name Background */}
-      <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0">
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-          className="font-display text-[20vw] sm:text-[18vw] md:text-[18vw] leading-none font-bold tracking-tighter flex whitespace-nowrap"
-        >
-          <span className="text-outline">HAL</span>
-          <span className="text-white">LINS</span>
-        </motion.h1>
+
+      {/* ── HALLINS background — HAL & LINS drop independently ── */}
+      <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden">
+        <h1 className="font-display text-[20vw] sm:text-[18vw] md:text-[18vw] leading-none font-bold tracking-tighter flex whitespace-nowrap">
+          <motion.span
+            className="text-outline inline-block"
+            initial={{ opacity: 0, y: -180 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={spring(0, 100, 16)}
+          >
+            HAL
+          </motion.span>
+          <motion.span
+            className="text-white inline-block"
+            initial={{ opacity: 0, y: -180 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={spring(0.09, 100, 16)}
+          >
+            LINS
+          </motion.span>
+        </h1>
       </div>
 
-      {/* Dark gradient overlay — hides HALLINS behind info block */}
+      {/* Dark gradient overlay */}
       <div
         className="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
         style={{ height: '60%', background: 'linear-gradient(to top, #000000 35%, rgba(0,0,0,0.85) 65%, transparent 100%)' }}
       />
 
-      {/* Photo */}
+      {/* ── Photo drops from above ── */}
       <motion.div
-        initial={{ opacity: 0, y: 100 }}
+        initial={{ opacity: 0, y: -260 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        transition={spring(0.05, 80, 20)}
         className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex justify-center items-end"
         style={{ height: '88%', maxWidth: 'min(680px, 85vw)' }}
       >
@@ -202,54 +239,63 @@ function HeroSection() {
         />
       </motion.div>
 
-      {/* Available badge — top-left of hero, below navbar */}
+      {/* ── Available badge drops ── */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
+        initial={{ opacity: 0, y: -70 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={spring(0.28, 140, 20)}
         className="absolute top-20 md:top-24 left-4 md:left-12 flex items-center gap-2 bg-black/40 border border-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full z-20 whitespace-nowrap"
       >
         <span className="relative flex h-2.5 w-2.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
         </span>
         <span className="text-xs font-medium tracking-wide text-white/80">Available for New Project</span>
       </motion.div>
 
-      {/* Bottom Left Info */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={staggerContainer}
-        className="absolute bottom-6 left-4 md:bottom-14 md:left-12 max-w-[280px] sm:max-w-xs md:max-w-sm z-20"
-      >
-        <motion.h2 variants={fadeUp} className="text-base sm:text-xl md:text-2xl font-display font-bold mb-2 md:mb-3 text-white">
+      {/* ── Bottom-left info — each line drops in cascade ── */}
+      <div className="absolute bottom-6 left-4 md:bottom-14 md:left-12 max-w-[280px] sm:max-w-xs md:max-w-sm z-20">
+        <motion.h2
+          initial={{ opacity: 0, y: -60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={spring(0.32, 130, 20)}
+          className="text-base sm:text-xl md:text-2xl font-display font-bold mb-2 md:mb-3 text-white"
+        >
           Web Design And Full Stack Developer
         </motion.h2>
-        <motion.p variants={fadeUp} className="text-muted-foreground text-xs sm:text-sm md:text-base mb-4 md:mb-6 leading-relaxed hidden sm:block">
+        <motion.p
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={spring(0.42, 130, 20)}
+          className="text-muted-foreground text-xs sm:text-sm md:text-base mb-4 md:mb-6 leading-relaxed hidden sm:block"
+        >
           I build responsive, scalable and high converting websites with full stack web apps and applications
         </motion.p>
-        <motion.button
-          variants={fadeUp}
-          className="group flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2.5 md:px-6 md:py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
+        <motion.a
+          href="/contact"
+          initial={{ opacity: 0, y: -45 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={spring(0.52, 130, 20)}
+          className="group inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2.5 md:px-6 md:py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
         >
           Let's collaborate
           <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-        </motion.button>
-      </motion.div>
+        </motion.a>
+      </div>
 
-      {/* Right Socials — desktop only */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 flex-col gap-6 z-20 hidden md:flex"
-      >
-        <SocialLink href="https://www.fiverr.com/hall_ket" icon={<SiFiverr />} label="Fiverr" />
-        <SocialLink href="https://www.upwork.com/freelancers/~0151b31429614d36ea?mp_source=share" icon={<SiUpwork />} label="Upwork" />
-        <SocialLink href="https://www.tiktok.com/@hallinsdev" icon={<SiTiktok />} label="TikTok" />
-        <SocialLink href="https://www.facebook.com/profile.php?id=61569828302942" icon={<SiFacebook />} label="Facebook" />
-      </motion.div>
+      {/* ── Right socials — each icon drops with stagger ── */}
+      <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 flex-col gap-6 z-20 hidden md:flex">
+        {socials.map((s, i) => (
+          <motion.div
+            key={s.label}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={spring(0.45 + i * 0.08, 140, 22)}
+          >
+            <SocialLink href={s.href} icon={s.icon} label={s.label} />
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }
