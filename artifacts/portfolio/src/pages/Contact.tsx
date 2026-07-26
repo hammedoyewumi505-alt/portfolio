@@ -211,6 +211,7 @@ function IntakeForm() {
           <option value="uiux" className="bg-[#111] text-white">UI/UX Design</option>
           <option value="nocode" className="bg-[#111] text-white">No-Code / Webflow</option>
           <option value="landing" className="bg-[#111] text-white">Landing Page</option>
+          <option value="ai" className="bg-[#111] text-white">AI Development</option>
           <option value="other" className="bg-[#111] text-white">Other</option>
         </select>
       </div>

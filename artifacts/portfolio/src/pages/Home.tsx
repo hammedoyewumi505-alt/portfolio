@@ -582,6 +582,12 @@ const services = [
     desc: 'Cross-platform mobile experiences built with React Native and Expo — smooth, native-feeling apps for iOS and Android.',
     tags: ['React Native', 'Expo', 'iOS', 'Android'],
   },
+  {
+    number: '05',
+    title: 'AI Development',
+    desc: 'Intelligent systems powered by GPT, Claude, and custom ML pipelines — chatbots, automation agents, and AI-native product features built to scale.',
+    tags: ['OpenAI', 'LangChain', 'Python', 'Automation'],
+  },
 ];
 
 // Items converge from opposite sides — odd rows from left, even from right

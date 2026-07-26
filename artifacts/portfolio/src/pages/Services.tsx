@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
   FiArrowUpRight, FiCheck, FiChevronDown,
-  FiMonitor, FiCode, FiLayout, FiSmartphone,
+  FiMonitor, FiCode, FiLayout, FiSmartphone, FiCpu,
   FiX, FiMenu,
 } from 'react-icons/fi';
 import { SiFiverr, SiUpwork, SiTiktok, SiFacebook } from 'react-icons/si';
@@ -106,6 +106,26 @@ const services = [
     tools: ['React Native', 'Expo', 'EAS Build', 'Zustand', 'React Navigation'],
     color: '#10b981',
     gradient: 'from-[#10b981]/20 via-transparent to-transparent',
+  },
+  {
+    id: 'ai-development',
+    number: '05',
+    icon: <FiCpu size={28} />,
+    title: 'AI Development',
+    tagline: 'Intelligent systems. Real-world results.',
+    description:
+      'I design and build AI-powered products — from GPT-driven chatbots and autonomous agents to custom ML pipelines and smart automation workflows. Whether you need an AI feature inside an existing app or a fully AI-native product, I engineer it end-to-end.',
+    deliverables: [
+      'Custom GPT / Claude chatbot integration',
+      'AI agent & multi-step automation workflows',
+      'RAG pipeline with vector database (Pinecone / pgvector)',
+      'AI-powered content generation & summarisation',
+      'LangChain / LlamaIndex orchestration',
+      'API integration (OpenAI, Anthropic, Gemini)',
+    ],
+    tools: ['OpenAI API', 'LangChain', 'Python', 'Pinecone', 'FastAPI', 'Node.js'],
+    color: '#8b5cf6',
+    gradient: 'from-[#8b5cf6]/20 via-transparent to-transparent',
   },
 ];
 
