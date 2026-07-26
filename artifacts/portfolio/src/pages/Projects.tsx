@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Footer from '@/components/Footer';
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, Variants } from 'framer-motion';
 import { FiArrowUpRight, FiX, FiMenu, FiArrowRight } from 'react-icons/fi';
 import { SiFiverr, SiUpwork, SiTiktok, SiFacebook } from 'react-icons/si';
@@ -488,6 +489,7 @@ export default function Projects() {
       <ProjectsHero />
       <ProjectsGrid />
       <ProjectsCTA />
+      <Footer />
     </div>
   );
 }

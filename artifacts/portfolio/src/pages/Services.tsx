@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Footer from '@/components/Footer';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
   FiArrowUpRight, FiCheck, FiChevronDown,
@@ -168,6 +169,7 @@ export default function Services() {
       <ProcessSection />
       <FAQSection />
       <CTASection />
+      <Footer />
     </div>
   );
 }

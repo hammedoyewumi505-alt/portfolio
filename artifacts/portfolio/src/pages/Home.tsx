@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Footer from '@/components/Footer';
 import { motion, AnimatePresence, Variants, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { SiFiverr, SiUpwork, SiTiktok, SiFacebook } from 'react-icons/si';
 import { FiArrowRight, FiArrowUpRight, FiChevronLeft, FiChevronRight, FiDownload, FiX, FiMenu } from 'react-icons/fi';
@@ -963,42 +964,3 @@ function AboutSection() {
 }
 
 /* ─── FOOTER ─── */
-function Footer() {
-  return (
-    <footer className="bg-black relative z-20 border-t-2 border-primary pt-16 md:pt-24 pb-10 md:pb-12 overflow-hidden flex flex-col items-center">
-      <div className="w-full flex justify-center mb-10 md:mb-16 select-none pointer-events-none">
-        <h2 className="font-display text-[14vw] md:text-[12vw] leading-none font-bold tracking-tighter text-outline opacity-20">
-          HALLINS
-        </h2>
-      </div>
-
-      <div className="text-center z-10 -mt-16 md:-mt-24 mb-8 md:mb-12 px-4">
-        <p className="text-xl sm:text-2xl md:text-3xl font-display font-medium mb-6 md:mb-8">
-          Let's build something great together
-        </p>
-        <div className="flex justify-center gap-4 md:gap-6">
-          {[
-            { href: 'https://www.fiverr.com/hall_ket', icon: <SiFiverr /> },
-            { href: 'https://www.upwork.com/freelancers/~0151b31429614d36ea?mp_source=share', icon: <SiUpwork /> },
-            { href: 'https://www.tiktok.com/@hallinsdev', icon: <SiTiktok /> },
-            { href: 'https://www.facebook.com/profile.php?id=61569828302942', icon: <SiFacebook /> },
-          ].map(({ href, icon }) => (
-            <a
-              key={href}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-primary transition-colors text-base md:text-lg"
-            >
-              {icon}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <div className="text-muted-foreground text-xs md:text-sm z-10">
-        © 2025 Hallins. All rights reserved.
-      </div>
-    </footer>
-  );
-}
