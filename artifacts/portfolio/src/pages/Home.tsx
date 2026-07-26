@@ -59,7 +59,7 @@ function Navbar() {
   const links = [
     { label: 'Services', href: '/services' },
     { label: 'Projects', href: '/projects' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   return (
