@@ -10,9 +10,6 @@ import photo from '@assets/file_00000000a20471f4bb4d9534d7debaeb-removebg-previe
 import project1 from '@assets/revesto_1785019235113.png';
 import project2 from '@assets/geda_1785019235107.png';
 import project3 from '@assets/wordpilot_1785019235115.png';
-import project4 from '@assets/prioi2_1785023935721.png';
-import project5 from '@assets/prto3_1785023935726.png';
-import project6 from '@assets/ptouj1_1785023935727.png';
 
 export default function Home() {
   return (
@@ -58,7 +55,7 @@ function Navbar() {
 
   const links = [
     { label: 'Services', href: '/services' },
-    { label: 'Projects', href: '#projects' },
+    { label: 'Projects', href: '/projects' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -300,7 +297,7 @@ const projectData = [
   {
     number: '01',
     title: 'Revesto Realtor',
-    desc: 'A high-end commercial real estate platform designed to convert browsers into booked tours. Features a clean property catalogue, agent contact flows, and a fully responsive layout built to instil trust at first scroll.',
+    desc: 'A high-end commercial real estate platform designed to convert browsers into booked tours.',
     tags: ['Real Estate', 'Web Design', 'Responsive'],
     image: project1,
     accent: '#ff3278',
@@ -308,7 +305,7 @@ const projectData = [
   {
     number: '02',
     title: 'GEDA',
-    desc: "Eswatini's first unified discovery platform — a no-code web app that surfaces local businesses, events, and experiences for both residents and tourists, giving the country a digital identity it never had before.",
+    desc: "Eswatini's first unified discovery platform — a no-code web app surfacing local businesses, events, and experiences.",
     tags: ['No-Code', 'Web App', 'Discovery Platform'],
     image: project2,
     accent: '#a855f7',
@@ -316,34 +313,10 @@ const projectData = [
   {
     number: '03',
     title: 'WordPilot AI',
-    desc: 'An AI-powered SaaS blog tool that drafts, edits, and schedules long-form content in seconds. Built on a modern no-code stack with OpenAI under the hood — giving solo creators the output of an entire content team.',
+    desc: 'An AI-powered SaaS blog tool that drafts, edits, and schedules long-form content in seconds.',
     tags: ['AI', 'SaaS', 'Blog Tool'],
     image: project3,
     accent: '#0ea5e9',
-  },
-  {
-    number: '04',
-    title: 'PPO Advisors',
-    desc: 'A conversion-focused website for a U.S. dental PPO consulting firm. The bold hero, teal brand system, and dual CTA strategy were engineered to turn skeptical practice owners into booked discovery calls within seconds.',
-    tags: ['Healthcare', 'Landing Page', 'Consulting'],
-    image: project4,
-    accent: '#14b8a6',
-  },
-  {
-    number: '05',
-    title: 'Nexus Advisory',
-    desc: 'A sophisticated B2B strategy consulting brand built for mid-market credibility. Editorial typography, a restrained navy-and-gold palette, and a cinematic office hero communicate authority before a single word is read.',
-    tags: ['B2B', 'Consulting', 'Brand Design'],
-    image: project5,
-    accent: '#d4a017',
-  },
-  {
-    number: '06',
-    title: 'Blaze FC',
-    desc: "A high-energy sports club website for a football academy with 9 000+ active members. Aggressive full-bleed hero, neon green accents, and real-time coach availability widgets make every visitor feel the adrenaline before they sign up.",
-    tags: ['Sports', 'Web Design', 'Community'],
-    image: project6,
-    accent: '#84cc16',
   },
 ];
 
@@ -542,32 +515,14 @@ function ProjectsSection() {
           </div>
         </div>
 
-        {/* Project grid — repeating 2-col / full-width pattern */}
+        {/* Project grid — 2 col top, 1 full-width bottom */}
         <div className="flex flex-col gap-6 md:gap-10">
-          {/* Row 1: pair */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             {projectData.slice(0, 2).map((proj, i) => (
               <TiltCard key={proj.number} proj={proj} index={i} />
             ))}
           </div>
-          {/* Row 2: full-width */}
           <TiltCard proj={projectData[2]} index={2} />
-
-          {/* Divider */}
-          <div className="flex items-center gap-4 py-4">
-            <div className="flex-1 h-px bg-white/5" />
-            <span className="text-xs font-mono text-white/20 tracking-widest">MORE WORK</span>
-            <div className="flex-1 h-px bg-white/5" />
-          </div>
-
-          {/* Row 3: pair */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-            {projectData.slice(3, 5).map((proj, i) => (
-              <TiltCard key={proj.number} proj={proj} index={i + 3} />
-            ))}
-          </div>
-          {/* Row 4: full-width */}
-          <TiltCard proj={projectData[5]} index={5} />
         </div>
 
         {/* View all CTA */}

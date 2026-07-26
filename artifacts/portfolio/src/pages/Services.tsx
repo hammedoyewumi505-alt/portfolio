@@ -187,7 +187,7 @@ function ServicesNav() {
 
   const links = [
     { label: 'Services', href: '/services' },
-    { label: 'Projects', href: '/#projects' },
+    { label: 'Projects', href: '/projects' },
     { label: 'Contact', href: '/#contact' },
   ];
 
