@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Footer from '@/components/Footer';
 import { motion, AnimatePresence, Variants, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { SiFiverr, SiUpwork, SiTiktok, SiFacebook } from 'react-icons/si';
-import { FiArrowRight, FiArrowUpRight, FiChevronLeft, FiChevronRight, FiDownload, FiX, FiMenu } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight, FiChevronLeft, FiChevronRight, FiX, FiMenu } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa6';
 
 import photo from '@assets/file_00000000a20471f4bb4d9534d7debaeb-removebg-preview_1785015317881.png';

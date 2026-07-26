@@ -119,15 +119,32 @@ function IntakeForm() {
     name: '', email: '', projectType: '', budget: '', timeline: '', message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(null);
 
   const handle = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? 'Something went wrong');
+      setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message ?? 'Failed to send. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass = (name: string) =>
@@ -276,13 +293,28 @@ function IntakeForm() {
         />
       </div>
 
+      {error && (
+        <p className="text-red-400 text-xs text-center bg-red-400/10 border border-red-400/20 rounded-xl py-3 px-4">{error}</p>
+      )}
+
       <motion.button
         type="submit"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="w-full flex items-center justify-center gap-3 bg-primary text-white font-medium py-4 rounded-xl text-sm shadow-[0_0_30px_rgba(255,50,120,0.35)] hover:bg-primary/90 transition-colors"
+        disabled={loading}
+        whileHover={{ scale: loading ? 1 : 1.02 }}
+        whileTap={{ scale: loading ? 1 : 0.98 }}
+        className="w-full flex items-center justify-center gap-3 bg-primary text-white font-medium py-4 rounded-xl text-sm shadow-[0_0_30px_rgba(255,50,120,0.35)] hover:bg-primary/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Send Message <FiSend />
+        {loading ? (
+          <>
+            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+            </svg>
+            Sending…
+          </>
+        ) : (
+          <>Send Message <FiSend /></>
+        )}
       </motion.button>
 
       <p className="text-center text-white/30 text-xs">I typically respond within 24 hours.</p>
